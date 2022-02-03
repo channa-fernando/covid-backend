@@ -8,6 +8,12 @@ public class ReadingsDTO {
     private String quarantineCenter;
     private String spo2Level;
     private String bodyTemp;
+    private String nameOfPositiveCase;
+    private String areYouVaccinated;
+    private String areYouLongTermTreat;
+    private Integer daysOfContact;
+    private Integer daysOfLastContact;
+    private List<String> answersArray;
     private List<Map> tracing;
 
     public String getQuarantineCenterContact() {
@@ -48,5 +54,53 @@ public class ReadingsDTO {
 
     public void setTracing(List<Map> tracing) {
         this.tracing = tracing;
+    }
+
+    public String getNameOfPositiveCase() {
+        return nameOfPositiveCase;
+    }
+
+    public void setNameOfPositiveCase(String nameOfPositiveCase) {
+        this.nameOfPositiveCase = nameOfPositiveCase;
+    }
+
+    public String getAreYouVaccinated() {
+        return areYouVaccinated;
+    }
+
+    public void setAreYouVaccinated(String areYouVaccinated) {
+        this.areYouVaccinated = areYouVaccinated;
+    }
+
+    public String getAreYouLongTermTreat() {
+        return areYouLongTermTreat;
+    }
+
+    public void setAreYouLongTermTreat(String areYouLongTermTreat) {
+        this.areYouLongTermTreat = areYouLongTermTreat;
+    }
+
+    public Integer getDaysOfContact() {
+        return daysOfContact;
+    }
+
+    public void setDaysOfContact(Integer daysOfContact) {
+        this.daysOfContact = daysOfContact;
+    }
+
+    public Integer getDaysOfLastContact() {
+        return daysOfLastContact;
+    }
+
+    public void setDaysOfLastContact(Integer daysOfLastContact) {
+        this.daysOfLastContact = daysOfLastContact;
+    }
+
+    public List<String> getAnswersArray() {
+        return answersArray;
+    }
+
+    public void setAnswersArray(List<String> answersArray) {
+        this.answersArray = answersArray;
     }
 }

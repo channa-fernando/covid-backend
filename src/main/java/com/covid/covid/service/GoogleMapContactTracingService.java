@@ -39,6 +39,8 @@ public class GoogleMapContactTracingService {
             locationDetail.setContactTracingDetail(contactTracingDetail);
             locationDetails.add(locationDetail);
         }
+        String answerCommaSeperatedArray = String.join(",", readingsDTO.getAnswersArray());
+        contactTracingDetail.setNatureOfContactAnswers(answerCommaSeperatedArray);
         contactTracingDetail.setLocationDetailList(locationDetails);
         contactTracingDetailRepository.save(contactTracingDetail);
         readingsDTOList.add(readingsDTO);
@@ -48,17 +50,17 @@ public class GoogleMapContactTracingService {
     public CircleResponseDTO contactTracingFinder(TracingQueryDTO tracingQueryDTO) {
         CircleResponseDTO circleResponseDTO = new CircleResponseDTO();
         List<Map> latLangListResponse = new ArrayList<>();
+        List<ContactTracingDetail> contactTracingDetailsList = contactTracingDetailRepository.findAll();
         try {
             Date dateFromQuery = new SimpleDateFormat("MM/dd/yyyy hh:mm a").parse(tracingQueryDTO.getDate().trim() + " " + tracingQueryDTO.getFrom());
             Date dateToQuery = new SimpleDateFormat("MM/dd/yyyy hh:mm a").parse(tracingQueryDTO.getDate().trim() + " " + tracingQueryDTO.getTo());
-            for (ReadingsDTO readingsDTO : readingsDTOList) {
-                List<Map> tracings = readingsDTO.getTracing();
-                for (Map trace : tracings) {
-                    Map<String, String> traceMap = trace;
-                    String dateStr = traceMap.get("date");
-                    String fromStr = traceMap.get("from");
-                    String toStr = traceMap.get("to");
-                    String latLangStr = traceMap.get("latLang");
+            for (ContactTracingDetail contactTracingDetail : contactTracingDetailsList) {
+                List<LocationDetail> tracings = contactTracingDetail.getLocationDetailList();
+                for (LocationDetail trace : tracings) {
+                    String dateStr = trace.getDate();
+                    String fromStr = trace.getFrom();
+                    String toStr = trace.getTo();
+                    String latLangStr = trace.getLatLang();
 
                     Date dateFrom = new SimpleDateFormat("MM/dd/yyyy hh:mm a").parse(dateStr.trim() + " " + fromStr);
                     Date dateTo = new SimpleDateFormat("MM/dd/yyyy hh:mm a").parse(dateStr.trim() + " " + toStr);

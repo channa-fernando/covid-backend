@@ -16,6 +16,12 @@ public class ContactTracingDetail {
     private String quarantineCenter;
     private String spo2Level;
     private String bodyTemp;
+    private String nameOfPositiveCase;
+    private String areYouVaccinated;
+    private String areYouLongTermTreat;
+    private Integer daysOfContact;
+    private Integer daysOfLastContact;
+    private String natureOfContactAnswers;
 
     @CreationTimestamp
     @Column(name = "created_date", updatable = false, nullable = true)
@@ -90,5 +96,53 @@ public class ContactTracingDetail {
 
     public void setLocationDetailList(List<LocationDetail> locationDetailList) {
         this.locationDetailList = locationDetailList;
+    }
+
+    public String getNameOfPositiveCase() {
+        return nameOfPositiveCase;
+    }
+
+    public void setNameOfPositiveCase(String nameOfPositiveCase) {
+        this.nameOfPositiveCase = nameOfPositiveCase;
+    }
+
+    public String getAreYouVaccinated() {
+        return areYouVaccinated;
+    }
+
+    public void setAreYouVaccinated(String areYouVaccinated) {
+        this.areYouVaccinated = areYouVaccinated;
+    }
+
+    public String getAreYouLongTermTreat() {
+        return areYouLongTermTreat;
+    }
+
+    public void setAreYouLongTermTreat(String areYouLongTermTreat) {
+        this.areYouLongTermTreat = areYouLongTermTreat;
+    }
+
+    public Integer getDaysOfContact() {
+        return daysOfContact;
+    }
+
+    public void setDaysOfContact(Integer daysOfContact) {
+        this.daysOfContact = daysOfContact;
+    }
+
+    public Integer getDaysOfLastContact() {
+        return daysOfLastContact;
+    }
+
+    public void setDaysOfLastContact(Integer daysOfLastContact) {
+        this.daysOfLastContact = daysOfLastContact;
+    }
+
+    public String getNatureOfContactAnswers() {
+        return natureOfContactAnswers;
+    }
+
+    public void setNatureOfContactAnswers(String natureOfContactAnswers) {
+        this.natureOfContactAnswers = natureOfContactAnswers;
     }
 }
