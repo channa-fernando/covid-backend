@@ -52,8 +52,8 @@ public class GoogleMapContactTracingService {
         List<Map> latLangListResponse = new ArrayList<>();
         List<ContactTracingDetail> contactTracingDetailsList = contactTracingDetailRepository.findAll();
         try {
-            Date dateFromQuery = new SimpleDateFormat("MM/dd/yyyy hh:mm a").parse(tracingQueryDTO.getDate().trim() + " " + tracingQueryDTO.getFrom());
-            Date dateToQuery = new SimpleDateFormat("MM/dd/yyyy hh:mm a").parse(tracingQueryDTO.getDate().trim() + " " + tracingQueryDTO.getTo());
+            Date dateFromQuery = new SimpleDateFormat("MM/dd/yyyy HH:mm").parse(tracingQueryDTO.getDate().trim() + " " + tracingQueryDTO.getFrom());
+            Date dateToQuery = new SimpleDateFormat("MM/dd/yyyy HH:mm").parse(tracingQueryDTO.getDate().trim() + " " + tracingQueryDTO.getTo());
             for (ContactTracingDetail contactTracingDetail : contactTracingDetailsList) {
                 List<LocationDetail> tracings = contactTracingDetail.getLocationDetailList();
                 for (LocationDetail trace : tracings) {
@@ -62,8 +62,8 @@ public class GoogleMapContactTracingService {
                     String toStr = trace.getTo();
                     String latLangStr = trace.getLatLang();
 
-                    Date dateFrom = new SimpleDateFormat("MM/dd/yyyy hh:mm a").parse(dateStr.trim() + " " + fromStr);
-                    Date dateTo = new SimpleDateFormat("MM/dd/yyyy hh:mm a").parse(dateStr.trim() + " " + toStr);
+                    Date dateFrom = new SimpleDateFormat("MM/dd/yyyy HH:mm").parse(dateStr.trim() + " " + fromStr);
+                    Date dateTo = new SimpleDateFormat("MM/dd/yyyy HH:mm").parse(dateStr.trim() + " " + toStr);
                     int comp1 = dateFrom.compareTo(dateToQuery);
                     int comp2 = dateFromQuery.compareTo(dateTo);
                     if (comp1 <= 0 && comp2 <= 0) {

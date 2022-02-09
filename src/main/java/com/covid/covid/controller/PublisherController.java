@@ -33,9 +33,9 @@ public class PublisherController extends BaseController {
 
     @PostMapping("/temperature")
     public ResponseEntity<String> sendDataToQueue(HttpServletRequest request, @RequestBody DataDTO dataDTO) {
-        if (!validateUser(request)) {
-            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-        }
+//        if (!validateUser(request)) {
+//            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+//        }
         rabbitTemplate.convertAndSend(EXCHANGE, ROUTING_KEY, dataDTO);
         logger.info("To Exchange: Data Packet: {}", EXCHANGE, ROUTING_KEY, dataDTO.getData());
         return new ResponseEntity<>("Success!", HttpStatus.OK);
@@ -43,18 +43,18 @@ public class PublisherController extends BaseController {
 
     @PostMapping("/submitreadings")
     public ResponseEntity<String> getReadings(HttpServletRequest request, @RequestBody ReadingsDTO readingsDTO) {
-        if (!validateUser(request)) {
-            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-        }
+//        if (!validateUser(request)) {
+//            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+//        }
         googleMapContactTracingService.submitReadings(readingsDTO);
         return new ResponseEntity<>("Success!", HttpStatus.OK);
     }
 
     @PostMapping("/getcircles")
     public ResponseEntity<CircleResponseDTO> getCircles(HttpServletRequest request, @RequestBody TracingQueryDTO tracingQueryDTO) {
-        if (!validateUser(request)) {
-            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-        }
+//        if (!validateUser(request)) {
+//            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+//        }
         logger.info(tracingQueryDTO.toString());
         CircleResponseDTO circleResponseDTO = googleMapContactTracingService.contactTracingFinder(tracingQueryDTO);
         return new ResponseEntity<>(circleResponseDTO, HttpStatus.OK);
