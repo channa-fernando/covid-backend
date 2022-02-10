@@ -4,11 +4,9 @@ import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
-import javax.persistence.Column;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @javax.persistence.Entity
 public class UserAccount {
@@ -38,6 +36,9 @@ public class UserAccount {
     @UpdateTimestamp
     @Column(name = "last_modified_date", nullable = true)
     private LocalDateTime updateDateTime;
+
+    @OneToMany(mappedBy = "userAccount",  cascade = CascadeType.ALL)
+    private List<ContactTracingDetail> contactTracingDetails;
 
     public UserAccount() {
     }
@@ -168,5 +169,13 @@ public class UserAccount {
 
     public void setUpdateDateTime(LocalDateTime updateDateTime) {
         this.updateDateTime = updateDateTime;
+    }
+
+    public List<ContactTracingDetail> getContactTracingDetails() {
+        return contactTracingDetails;
+    }
+
+    public void setContactTracingDetails(List<ContactTracingDetail> contactTracingDetails) {
+        this.contactTracingDetails = contactTracingDetails;
     }
 }

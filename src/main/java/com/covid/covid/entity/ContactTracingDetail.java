@@ -34,6 +34,9 @@ public class ContactTracingDetail {
     @OneToMany(mappedBy = "contactTracingDetail", cascade = CascadeType.ALL)
     private List<LocationDetail> locationDetailList;
 
+    @ManyToOne
+    private UserAccount userAccount;
+
     public Long getId() {
         return id;
     }
@@ -144,5 +147,13 @@ public class ContactTracingDetail {
 
     public void setNatureOfContactAnswers(String natureOfContactAnswers) {
         this.natureOfContactAnswers = natureOfContactAnswers;
+    }
+
+    public UserAccount getUserAccount() {
+        return userAccount;
+    }
+
+    public void setUserAccount(UserAccount userAccount) {
+        this.userAccount = userAccount;
     }
 }

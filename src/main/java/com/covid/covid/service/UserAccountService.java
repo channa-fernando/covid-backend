@@ -10,6 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
 public class UserAccountService {
     @Autowired
@@ -54,5 +56,9 @@ public class UserAccountService {
 
     public UserAccount findByToken(String token) {
         return userAccountRepository.findUseByToken(token);
+    }
+
+    public Optional<UserAccount> findById(Long id){
+        return userAccountRepository.findById(id);
     }
 }

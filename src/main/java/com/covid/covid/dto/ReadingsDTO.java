@@ -15,6 +15,7 @@ public class ReadingsDTO {
     private Integer daysOfLastContact;
     private List<String> answersArray;
     private List<Map> tracing;
+    private String token;
 
     public String getQuarantineCenterContact() {
         return quarantineCenterContact;
@@ -102,5 +103,13 @@ public class ReadingsDTO {
 
     public void setAnswersArray(List<String> answersArray) {
         this.answersArray = answersArray;
+    }
+
+    public String getToken() {
+        return token;
+    }
+
+    public void setToken(String token) {
+        this.token = token;
     }
 }
