@@ -8,9 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 @RequestMapping("/monitoring")
@@ -44,4 +42,15 @@ public class HealthMonitoringController {
 
     }
 
-}
+    @PostMapping("/doctorComment/{patientId}")
+    public ResponseEntity submitComment(@PathVariable Long patientId, @RequestBody String comment) {
+        logger.info("Doctors Comment: {}, Patient Id: {}", comment, patientId);
+        if (healthMonitoringService.submitComment(patientId, comment)) {
+            return new ResponseEntity(HttpStatus.OK);
+        } else {
+            return new ResponseEntity(HttpStatus.BAD_REQUEST);
+        }
+
+    }
+
+    }

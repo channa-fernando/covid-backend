@@ -36,6 +36,7 @@ public class ContactTracingDetail {
 
     @ManyToOne
     private UserAccount userAccount;
+    private String comment;
 
     public Long getId() {
         return id;
@@ -155,5 +156,13 @@ public class ContactTracingDetail {
 
     public void setUserAccount(UserAccount userAccount) {
         this.userAccount = userAccount;
+    }
+
+    public String getComment() {
+        return comment;
+    }
+
+    public void setComment(String comment) {
+        this.comment = comment;
     }
 }

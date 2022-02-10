@@ -59,4 +59,15 @@ public class HealthMonitoringService {
         }
         return notifications;
     }
+
+    public boolean submitComment(Long patientId, String comment) {
+        Optional<ContactTracingDetail> contactTracingDetail = contactTracingDetailRepository.findContactTracingDetailByUserAccountId(patientId);
+        if (contactTracingDetail.isPresent()) {
+            ContactTracingDetail contactTracingDetailFromDB = contactTracingDetail.get();
+            contactTracingDetailFromDB.setComment(comment);
+            contactTracingDetailRepository.save(contactTracingDetailFromDB);
+            return true;
+        }
+        return false;
+    }
 }
