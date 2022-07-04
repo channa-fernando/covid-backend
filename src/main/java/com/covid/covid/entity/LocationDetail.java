@@ -27,6 +27,8 @@ public class LocationDetail {
     @ManyToOne
     private ContactTracingDetail contactTracingDetail;
 
+    private String fireBaseSavedTime;
+
     public LocationDetail() {
     }
 
@@ -92,5 +94,13 @@ public class LocationDetail {
 
     public void setUpdateDateTime(LocalDateTime updateDateTime) {
         this.updateDateTime = updateDateTime;
+    }
+
+    public String getFireBaseSavedTime() {
+        return fireBaseSavedTime;
+    }
+
+    public void setFireBaseSavedTime(String fireBaseSavedTime) {
+        this.fireBaseSavedTime = fireBaseSavedTime;
     }
 }

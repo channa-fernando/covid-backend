@@ -4,6 +4,8 @@ import com.covid.covid.dto.CircleResponseDTO;
 import com.covid.covid.dto.DataDTO;
 import com.covid.covid.dto.ReadingsDTO;
 import com.covid.covid.dto.TracingQueryDTO;
+import com.covid.covid.entity.LocationDetail;
+import com.covid.covid.service.FireBaseCloudBasedService;
 import com.covid.covid.service.GoogleMapContactTracingService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -17,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.List;
 
 import static com.covid.covid.util.Constant.EXCHANGE;
 import static com.covid.covid.util.Constant.ROUTING_KEY;
@@ -30,6 +33,9 @@ public class PublisherController extends BaseController {
 
     @Autowired
     private GoogleMapContactTracingService googleMapContactTracingService;
+
+    @Autowired
+    private FireBaseCloudBasedService fireBaseCloudBasedService;
 
     @PostMapping("/temperature")
     public ResponseEntity<String> sendDataToQueue(HttpServletRequest request, @RequestBody DataDTO dataDTO) {
@@ -56,8 +62,7 @@ public class PublisherController extends BaseController {
 //            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 //        }
         logger.info(tracingQueryDTO.toString());
-        CircleResponseDTO circleResponseDTO = googleMapContactTracingService.contactTracingFinder(tracingQueryDTO);
-        return new ResponseEntity<>(circleResponseDTO, HttpStatus.OK);
+        return new ResponseEntity<>(googleMapContactTracingService.contactTracingFinder(tracingQueryDTO), HttpStatus.OK);
     }
 
 

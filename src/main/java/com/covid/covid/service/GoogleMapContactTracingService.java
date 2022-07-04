@@ -1,6 +1,7 @@
 package com.covid.covid.service;
 
 import com.covid.covid.dto.CircleResponseDTO;
+import com.covid.covid.dto.CommonResponse;
 import com.covid.covid.dto.ReadingsDTO;
 import com.covid.covid.dto.TracingQueryDTO;
 import com.covid.covid.entity.ContactTracingDetail;
@@ -54,6 +55,7 @@ public class GoogleMapContactTracingService {
         try {
             Date dateFromQuery = new SimpleDateFormat("MM/dd/yyyy HH:mm").parse(tracingQueryDTO.getDate().trim() + " " + tracingQueryDTO.getFrom());
             Date dateToQuery = new SimpleDateFormat("MM/dd/yyyy HH:mm").parse(tracingQueryDTO.getDate().trim() + " " + tracingQueryDTO.getTo());
+            List<String> CoordinatesSelected = new ArrayList();
             for (ContactTracingDetail contactTracingDetail : contactTracingDetailsList) {
                 List<LocationDetail> tracings = contactTracingDetail.getLocationDetailList();
                 for (LocationDetail trace : tracings) {
@@ -66,12 +68,13 @@ public class GoogleMapContactTracingService {
                     Date dateTo = new SimpleDateFormat("MM/dd/yyyy HH:mm").parse(dateStr.trim() + " " + toStr);
                     int comp1 = dateFrom.compareTo(dateToQuery);
                     int comp2 = dateFromQuery.compareTo(dateTo);
-                    if (comp1 <= 0 && comp2 <= 0) {
+                    if (comp1 <= 0 && comp2 <= 0 && !CoordinatesSelected.contains(latLangStr)) {
                         Map<String, String> latLang = new HashMap<>();
                         List<String> latLangList = Arrays.asList(latLangStr.split("\\s*,\\s*"));
                         latLang.put("latitude", latLangList.get(0).trim());
                         latLang.put("longitude", latLangList.get(1).trim());
                         latLangListResponse.add(latLang);
+                        CoordinatesSelected.add(latLangStr);
                     }
                 }
             }
@@ -80,6 +83,7 @@ public class GoogleMapContactTracingService {
         }
         circleResponseDTO.setLatLangList(latLangListResponse);
         logger.info("Response Circles: {}", latLangListResponse);
+        logger.info("Response Circles Size: {}", latLangListResponse.size());
         return circleResponseDTO;
     }
 }
